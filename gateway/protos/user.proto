@@ -1,0 +1,47 @@
+syntax = "proto3";
+
+message User {
+    string username = 1;
+    string email = 2;
+    string password = 3;
+}
+
+message CreateUserRequest {
+    User user = 1;
+}
+
+message CreateUserRespose {
+    string _id = 1;
+}
+
+message GetUserRequest {
+    string _id = 1;
+}
+
+message GetUserResponse {
+   User user  = 1;
+}
+
+message CreateTokenRequest {
+    User user  = 1;
+}
+
+message CeateTokenResponse {
+ string token = 1;
+}
+
+message IsAuthenticatedRequest {
+    string token = 1;
+}
+
+message IsAuthenticatedResponse {
+ User user = 1;
+ bool ok = 2;
+}
+
+service UserService {
+    rpc CreateUser(CreateUserRequest) returns (CreateUserRespose) {};
+    rpc GetUser(GetUserRequest) returns (GetUserResponse) {};
+    rpc CreateToken (CreateTokenRequest) returns (CeateTokenResponse) {};
+    rpc IsAuthenticated(IsAuthenticatedRequest) returns (IsAuthenticatedResponse) {};
+ }
